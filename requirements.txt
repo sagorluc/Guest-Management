@@ -5,6 +5,7 @@ charset-normalizer==3.3.2
 crispy-bootstrap5==2023.10
 cryptography==42.0.3
 defusedxml==0.7.1
+dj-database-url==2.1.0
 Django==4.2.7
 django-cors-headers==4.3.1
 django-crispy-forms==2.1
@@ -19,6 +20,7 @@ oauthlib==3.2.2
 packaging==23.2
 Pillow==10.1.0
 polib==1.2.0
+psycopg2-binary==2.9.9
 pycparser==2.21
 PyJWT==2.8.0
 pyOpenSSL==24.0.0
