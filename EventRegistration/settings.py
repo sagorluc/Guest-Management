@@ -18,7 +18,8 @@ FILTERS_DISABLE_HELP_TEXT = True
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = "django-insecure-405vf4n9(92i_0f$e#33ii(^o5%l-pdr07(h1x(nxm9&vtif5w"
+# SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECRET_KEY = os.getenv('SECRET_KEY')
 
 
