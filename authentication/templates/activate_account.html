@@ -1,0 +1,6 @@
+{% autoescape off%}
+    Hi {{user}}
+    Welcome To Event Registration System
+    Please click in the link below to activate your account! 
+    http://{{domain}}{% url 'activate' uidb64=uid token=token %}
+{% endautoescape %}

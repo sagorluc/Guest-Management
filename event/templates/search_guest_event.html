@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block title %}Details of Event{% endblock title %}
+{% block body %}
+<div class='container'>
+
+ <h1 id="moving-title" style="width: 53%; margin: auto;text-align: left; padding: 15px; font-size: 40px">
+    Searching Data
+ </h1>
+ <br>
+
+ {% if events %}
+ 
+ <table class="table table-success table-striped" style="width:95%; margin: auto; text-align: center; margin-top: 50px;">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Owner</th>
+        <th scope="col">Event Title</th>
+        <th scope="col">Event Data</th>
+        <th scope="col">Event Time</th>
+        <th scope="col">Total Seat</th>
+        <th scope="col">Details Event</th>
+        <th scope="col">Registration Event</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for event in events %}
+      <tr>      
+          <th scope="row">{{ event.id }}</th>
+          <td>{{ event.eventUser.username }}</td>
+          <td>{{ event.eventTitle }}</td>
+          <td>{{ event.eventDate }}</td>
+          <td>{{ event.eventTime }}</td>
+          <td>{{ event.totalSeat }}</td>
+          <td><a href="{% url "event_details" event.id %}" class="btn btn-primary">Event Details</a></td>
+  
+          {% if event.totalSeat > 0 %}
+              <td><a href="{% url "event_register" event.id %}" class="btn btn-primary">Registration</a></td>
+          {% else %}
+              <td><button class="btn btn-primary" disabled>Registration</button></td>
+          {% endif %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% elif guests %}
+
+  <table class="table table-success table-striped" style="width:95%; margin: auto; text-align: center; margin-top: 50px;">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Mobile Number</th>
+        <th scope="col">Total Person</th>
+        <th scope="col">Details</th>   
+      </tr>
+    </thead>
+    <tbody> 
+    {% for gst in guests %}   
+      <tr>      
+        <th scope="row">{{gst.id}}</th>
+        <td> {{gst.firstName}} </td>
+        <td> {{gst.lastName}} </td>
+        <td> {{gst.email}} </td>
+        <td> {{gst.phoneNumber}} </td>
+        <td> {{gst.totalPerson}} </td>          
+        <td> <a href="{% url "guest_details" gst.id %}" class="btn btn-primary">Guest Details</a> </td>
+
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+ {% endif %}
+</div>
+
+{% endblock body %}

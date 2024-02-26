@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+{% load static %}
+{% load i18n %}
+<html lang="en" dir={% trans "dir" %}>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Add Bootstrap CSS CDN link -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static "css/message_style.css" %}">
+  <link rel="stylesheet" href="{% static "css/style.css" %}">
+  <link rel="stylesheet" href="{% static "css/popup_style.css" %}">
+
+  {% block join_css %}{% endblock join_css %}
+  <title>{% block title %}{% endblock title %}</title>
+  
+</head>
+<body>
+  {% if request.user.is_authenticated %}
+    <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+      <div class="container-fluid">
+        <a class="navbar-brand " href="#" style="color: aqua">
+          Guest Management
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Api
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="{% url "event_read_create" %}">Event Read Create</a></li>
+                <!-- Add more dropdown items as needed -->
+              </ul>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url "dashboard" %}">DashBoard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url "home" %}">Event</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url "create_event" %}">Create Event</a>
+            </li>
+          </ul>
+          <h5 style="color:aqua;margin-right: 20px;">User: {{user.username}}</h5>
+          <form class="d-flex" role="search" action="{% url "search" %}" method="GET">
+            
+            <input class="form-control me-2" name="keyword" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+
+        <div class="dropdown me-auto">
+          {% get_current_language as CURRENT_LANGUAGE %}
+          {% get_available_languages as AVAILABLE_LANGUAGES %}
+          {% get_language_info_list for AVAILABLE_LANGUAGES as languages %}
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                LAN
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                {% for language in languages  %}
+                <li><a class="dropdown-item {% if language.code == CURRENT_LANGUAGE %}active{% endif %}" href="/{{language.code}}/">{{language.name_local}}</a></li>
+                {% endfor %}
+                <!-- Add more dropdown items as needed -->
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <li class="nav-item">
+            <a href="{% url "logout" %}" class="btn btn-warning mx-4">LogOut</a>
+          </li>
+
+        </div>
+      </div>
+    </nav>
+  {% endif %}
+{% block body %}
+
+{% endblock body %}
+
+
+    <!-- ========================= FOOTER ========================= -->
+  {% if request.user.is_authenticated %}
+    <footer class="section-footer border-top padding-y" style="margin-top: 500px;">
+      <div class="container">
+        <p class="float-md-right">&copy Copyright 2023 All rights reserved</p>
+        <p>
+          <a href="#" style="text-decoration: None">Terms and conditions</a>
+        </p>
+      </div>
+      <!-- //container -->
+    </footer>
+  {% endif %}
+    <!-- ========================= FOOTER END // ========================= -->
+
+<!-- Custom js -->
+<script src="{% static "js/message_alart.js" %}"></script>
+<script src="{% static "js/popup_input.js" %}"></script>
+<script src="{% static "js/show_password.js" %}"></script>
+<script src="{% static "js/form_validation.js" %}"></script>
+
+<!-- Add Bootstrap JS and Popper.js CDN scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+<!-- Bootstrap datePicker -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+</body>
+</html>

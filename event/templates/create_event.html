@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Create Event{% endblock title %}
+{% load crispy_forms_tags %}
+{% block body %}
+    <h1 id="moving-title" style="width: 53%; margin: auto;text-align: left; padding: 15px; font-size: 40px">
+        Create Event
+    </h1>
+    <br>
+    
+    <div style="width: 30%; margin: auto; margin-bottom: 100px;">
+     
+        <form method= 'POST'id="myForm" >
+            {% csrf_token %}
+            <!-- Creat event validation -->
+            <div style="color:red;" class="is-invalid" id="eventOwnerName"></div>
+            <div style="color:red;" class="is-invalid" id="eventTitle"></div><br>
+            {{forms|crispy}}
+            <input class="btn btn-primary" type="submit" value="Post">
+
+        </form>
+
+    </div>
+{% endblock body %}
+

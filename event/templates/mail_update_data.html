@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block body %}
+    <div class='container' style="width:50%; margin:auto; margin-top: 20px; margin-bottom: 10px;">
+        <h3 style="color:green;">Updated of event information</h3>
+        <table class="table">
+          <tbody>
+              <tr>
+                  <th scope="row">Event ID:</th>
+                  <td>{{ event_id }}</td>
+              </tr>
+              <tr>
+                  <th scope="row">Event Owner:</th>
+                  <td><strong>{{event_owner_name}}</strong></td>
+              </tr>
+              <tr>
+                  <th scope="row">Event Title:</th>
+                  <td><strong>{{event_title}}</strong></td>
+              </tr>
+              <tr>
+                  <th scope="row">Event Date:</th>
+                  <td><strong style="color:blue;">{{date}}</strong></td>
+              </tr>
+              <tr>
+                <th scope="row">Event Time: </th>
+                <td><strong style="color:blue;">{{time}}</strong></td>
+              </tr>
+              <tr>
+                <th scope="row">Event Location:</th>
+                <td>{{event_location}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Event Description:</th>
+                <td>{{event_description}}</td>
+              </tr>
+              <tr>
+              <!-- Add more rows as needed -->
+          </tbody>
+      </table>
+  </div>
+    
+{% endblock body %}

@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+  {% load static %}
+  {% block title %}Registration{% endblock title %}
+  {% load crispy_forms_tags %}
+  {% block body %}
+
+  <script>
+    // User Registration field validation
+    // alert('reading from registration form')
+    document.addEventListener('DOMContentLoaded', function () {   
+      var form = document.getElementById('myForm');
+
+      // Registration email address validation
+      var passwordInput1 = form.querySelector('#id_password1');
+      var passwordError1 = document.getElementById('password1');
+  
+      // Registration friend email address validation
+      var passwordInput2 = form.querySelector('#id_password2');
+      var passwordError2 = document.getElementById('password2');
+  
+      function showError(field, errorField, errorMessage) {
+        errorField.innerHTML = errorMessage;
+        field.classList.add('is-invalid');
+      }
+  
+      function clearError(field, errorField) {
+        errorField.innerHTML = '';
+        field.classList.remove('is-invalid');
+      }
+  
+      function passwordValidate(field1, field2, errorField) {
+        if (field1.value !== field2.value) {
+          var errMsg = 'Password must need to be match with confirm password.';
+          showError(field1, errorField, errMsg);
+          showError(field2, errorField, errMsg);
+          return false;
+        } else {
+          clearError(field1, errorField);
+          clearError(field2, errorField);
+          return true;
+        }
+      }
+
+      function validateName(field, errorField) {
+        if (!/^[a-zA-Z\s]+$/.test(field.value.trim())) {
+          var errMsgName = 'Spacific character are not allowed.'
+          showError(field, errorField, errMsgName);
+          return false;
+        } else {
+          clearError(field, errorField);
+          return true;
+        }
+      }
+  
+      function validateEmailAddress(field, errorField) {
+        // !/^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        if (!/^[0-9a-zA-Z]{1,3}[^\s@]+@[^\s@]+\.[a-zA-Z]{2,3}$/.test(field.value.trim())) {
+          var errMsgEmail = 'Email is not valid format.'
+          showError(field, errorField, errMsgEmail);
+          return false;
+        } else {
+          clearError(field, errorField);
+          return true;
+        }
+      }
+  
+      // Registration event fristName validation
+      var firstNameInput = form.querySelector('#id_first_name');
+      var firstNameError = document.getElementById('firstName');
+  
+      // Registration event lastName validation
+      var lastNameInput = form.querySelector('#id_last_name');
+      var lastNameError = document.getElementById('lastName');
+  
+      // Registration event friendName validation
+      var emailInput = form.querySelector('#id_email');
+      var emailError = document.getElementById('email'); 
+  
+      // input evntListener
+      firstNameInput.addEventListener('input', function () {
+        validateName(firstNameInput, firstNameError);
+      });
+      lastNameInput.addEventListener('input', function () {
+        validateName(lastNameInput, lastNameError);
+      });
+      emailInput.addEventListener('input', function () {
+        validateEmailAddress(emailInput, emailError);
+      }); 
+
+      // Password input event listeners
+      passwordInput1.addEventListener('input', function () {
+        passwordValidate(passwordInput1, passwordInput2, passwordError2);
+      }); 
+      passwordInput2.addEventListener('input', function () {
+        passwordValidate(passwordInput1, passwordInput2, passwordError2);
+      }); 
+  
+    });
+</script>
+
+<div style="width:30%; margin: auto; ">
+  <h1 id="moving-title" class="text-center" style="margin-top: 20px; font-size: 40px">Sign Up</h1>
+    {% if forms.non_field_errors %} 
+    {% for error in forms.non_field_errors %}
+        <div
+        class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-2"
+        role="alert">
+        <p class="block sm:inline">{{ error.password }}</p>
+        </div>
+    {% endfor %} 
+    {% endif %} 
+    
+    <form method= "POST" id="myForm" style="margin-bottom: 50px; margin-top: 50px;" novalidate>
+        {% csrf_token %}
+        <div style="color:red;" class="is-invalid" id="firstName"></div>
+        <div style="color:red;" class="is-invalid" id="lastName"></div>
+        <div style="color:red;" class="is-invalid" id="email"></div>
+        <div style="color:red;" class="is-invalid" id="password1"></div><br>
+        <div style="color:red;" class="is-invalid" id="password2"></div><br>
+
+        {{form|crispy}}
+        <input class="btn btn-primary" type="submit" value="Register"><br><br>
+        <a style="text-decoration: None;" href="{% url 'login' %}">Already have an account? click here</a><br>
+    </form>
+</div>
+  {% endblock body %}

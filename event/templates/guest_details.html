@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}Details of Guest{% endblock title %}
+{% block body %}
+<h1 id="moving-title" style="width: 53%; margin: auto;text-align: left; padding: 15px; font-size: 40px">
+  Details Of Guest
+</h1>
+<br>
+  <div style="width: 53%; margin: auto;">
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="alert {% if message.tags == 'error' %}error{% endif %}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+<div class='container' style="width:50%; margin:auto; margin-top: 20px; margin-bottom: 10px;">
+      <table class="table">
+        <tbody>
+            <tr>
+                <th scope="row">Event ID:</th>
+                <td>{{ guest.id }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Guest Full Name:</th>
+                <td>{{ guest.firstName }} {{ guest.lastName }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Guest Mail:</th>
+                <td>{{ guest.email }}</td>
+            </tr>
+            <tr>
+              {% if guest.friendName%}
+                <th scope="row">Guest With:</th>
+                <td>{{ guest.friendName }}<br>{{ guest.friendEmail }}</td>
+                {% else %}
+                <th scope="row">Guest With:</th>
+                <td style="color: red;">Null</td>
+                {% endif %}
+            </tr>
+            <tr>
+              <th scope="row">Guest Mobile: </th>
+              <td>{{guest.phoneNumber}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Guest Person:</th>
+              <td>{{guest.totalPerson}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Owner of event:</th>
+              <td>{{guest.event.eventOwnerName}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Event name:</th>
+              <td>{{guest.event.eventTitle}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Event location:</th>
+              <td>{{guest.event.eventLocation}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Event date:</th>
+              <td>{{guest.event.eventDate}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Event time:</th>
+              <td>{{guest.event.eventTime}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Registration date:</th>
+              <td>{{guest.createDate}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Last update:</th>
+              <td>{{guest.modifyDate}}</td>
+            </tr>
+            <!-- Add more rows as needed -->
+        </tbody>
+    </table>
+</div>
+
+{% endblock body %}

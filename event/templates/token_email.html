@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Token Email{% endblock title %}
+{% load crispy_forms_tags %}
+{% block body %}
+    <p>Event id is <strong>{{ event_id }}</strong></p>
+    <p>Total token is: <strong>{{ total_seat }}</strong></p>
+    <p>Your token for your event guest is: <mark>{{ token }}</mark></p>
+    <h3>Thank you for choosing our service</h3>
+{% endblock body %}

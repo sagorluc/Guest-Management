@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+  {% comment %} {% load socialaccount %} {% endcomment %}
+  {% load static %}
+  {% block title %}Login{% endblock title %}
+  {% load crispy_forms_tags %}
+  {% block body %}
+
+  <h1 id="moving-title" class="text-center" style="margin-top: 20px; font-size: 40px">Sign In</h1>
+  <div style="width: 60%; margin: auto; margin-top: 50px;">   
+    <ul class="nav justify-content-end">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Api
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" style="width: 90%;">
+          <li><a class="dropdown-item" href="{% url "register_api" %}">Registration Account</a></li>
+          <li><a class="dropdown-item" href="{% url "login_api" %}">Login Account</a></li>
+          <li><a class="dropdown-item" href="{% url "event_read_create" %}">Event Read Create</a></li>
+          <!-- Add more dropdown items as needed -->
+        </ul>
+      </li>
+      <li class="nav-item">
+        {% comment %} <a class="nav-link active" aria-current="page" href="{% url "event_read_create" %}">Other Page</a> {% endcomment %}
+      </li>
+      <!-- Add more navigation items as needed -->
+    </ul>
+  </div>
+
+      <br>
+      <div style="width: 53%; margin: auto;">
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <div class="alert {% if message.tags == 'error' %}error{% endif %}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      
+      <div style="width: 30%; margin: auto; margin-bottom: 100px;">
+
+        <form method="POST" action="#">
+            {% csrf_token %}
+            {% comment %} <div class="mb-3">
+              <label for="email" class="form-label">Username</label>
+              <input type="text" class="form-control" id="email" name="username" required>
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" id="password" name="password" required>
+            </div> {% endcomment %}
+            {{form|crispy}}
+            <input type="checkbox" name="password" id="id_password" onclick="showPassword()"> Show password <br><br>
+            <button type="submit" class="btn btn-primary">Login</button> <br><br>
+            <a style="text-decoration: None;" href="{% url 'register' %}">Don't have an account? click here</a><br>
+            <a style="text-decoration: None;" href="{% url "forget_password" %}">Forgot Password? click here</a>
+          </form> 
+      </div>
+  {% endblock body %}

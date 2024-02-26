@@ -1,0 +1,36 @@
+/* Popup Card Styles */
+.popup-card {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    z-index: 999;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+/* Popup Form Styles */
+.popup-form {
+    max-width: 300px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Button Styles */
+.popup-form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.popup-form button:hover {
+    background-color: #0056b3;
+}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="center" style="width:50%; margin:auto; text-align: center; margin-top: 100px; margin-bottom: 250px;">
+	<form method="post" class="card">
+		{% csrf_token %}
+		<h2 style="color:red;">Delete Event</h2>
+		<p style="color:white;">Are you sure that you want to delete "{{event}}"?</p>
+		<p class="form-buttons">
+                <input type="submit" class="btn btn-danger" value="Delete">
+			<a href="{% url 'dashboard'%}" class="btn btn-primary">Cancel</a>
+		</p>
+	</form>
+</div>
+
+{% endblock body %}

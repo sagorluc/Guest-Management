@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}Register Event{% endblock title %}
+{% load crispy_forms_tags %}
+{% block body %}
+    <h1 id="moving-title" style="width: 53%; margin: auto;text-align: left; padding: 15px; font-size: 40px">
+        Registration as guest
+    </h1>
+    <br>
+    <div style="width: 53%; margin: auto;">
+      {% if messages %}
+      <div class="messages">
+          {% for message in messages %}
+          <div class="alert {% if message.tags == 'error' %}error{% endif %}">
+              {{ message }}
+          </div>
+          {% endfor %}
+      </div>
+      {% endif %}
+    </div> 
+
+    <div style="width: 30%; margin: auto; margin-bottom: 100px;">
+        <!-- Popup HTML -->
+        {% comment %} <div id="popup" class="popup-card">
+            <form method="POST" id="popupForm" class="popup-form">
+                {% csrf_token %}
+                <input type="text" id="friend_name" name="friend_name" placeholder="Enter full name" required><br><br>
+                <input type="email" id="friend_email" name="friend_email" placeholder="Enter email" required><br><br>
+                <p style="color:green;">Name of person who come with you</p>
+                <button type="submit">Submit</button>
+            </form>
+        </div> {% endcomment %}
+
+            
+        <form method= 'POST' action="#" id="myForm">
+            {% csrf_token %}
+            <!-- Registration event validation -->
+            <div style="color:red;" class="is-invalid" id="firstName"></div>
+            <div style="color:red;" class="is-invalid" id="lastName"></div>
+            <div style="color:red;" class="is-invalid" id="email"></div>
+            <div style="color:red;" class="is-invalid" id="friendName"></div>
+            <div style="color:red;" class="is-invalid" id="friendEmail"></div><br>
+            {{forms|crispy}}
+            <input class="btn btn-primary" type="submit" value="Register">
+
+        </form>
+
+    </div>
+{% endblock body %}
+
